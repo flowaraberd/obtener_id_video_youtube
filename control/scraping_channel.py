@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from control.logs import capture_error
 
 
+# Función para obtener los datos necesarios.
 def get_data_channel(url: str):
     # Realiza una solicitud GET a YouTube
     _url = url.strip()

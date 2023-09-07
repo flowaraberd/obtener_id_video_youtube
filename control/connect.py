@@ -13,6 +13,8 @@ def set_connect():
     connect = connector.connect(**CONFIG.config_db)
     cursor = connect.cursor()
 
+    # Para verificar si la tabla existe, en caso de no,
+    # realiza una llamada a las funciones que esten en "call"
     is_table_exists(
         cursor=cursor,
         call=[
@@ -21,6 +23,7 @@ def set_connect():
     )
 
     try:
+        # Leer las URLs de los canales a realizar el Scraping.
         with open(CONFIG.path_urls_channel, 'r') as channels:
             for url_channel in channels.readlines():
                 try:
@@ -29,8 +32,8 @@ def set_connect():
 
                     is_video_id_exists(
                         cursor=cursor,
-                        video_id=video_id['video_id'],
-                        youtube_channel=video_id['youtube_id']
+                        video_id=video_id['video_id'], # El ID del Video de YouTube
+                        youtube_channel=video_id['youtube_id'] # Usuario de YouTube
                     )
                     connect.commit()
                 except Exception as error:

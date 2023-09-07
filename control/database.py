@@ -2,6 +2,7 @@ from datetime import datetime
 from control.logs import capture_error
 
 
+# Verificar si la tabla a crear existe, antes de crearla.
 def is_table_exists(**data):
     try:
         cursor = data['cursor']
@@ -19,6 +20,7 @@ def is_table_exists(**data):
         pass
 
 
+# Estructura de la Tabla.
 def create_table_video_yt_id() -> dict:
     table_name = "video_yt_id"
     sql = """
@@ -34,6 +36,8 @@ def create_table_video_yt_id() -> dict:
     return dict(table_name=table_name, sql=sql)
 
 
+# Para verificar si el ID existe en la Base de datos
+# antes de insertarlo.
 def is_video_id_exists(cursor, video_id: str, youtube_channel: str):
     timestamp = datetime.now()
     sql = f"SELECT 1 FROM video_yt_id WHERE video_id='{video_id}'"
